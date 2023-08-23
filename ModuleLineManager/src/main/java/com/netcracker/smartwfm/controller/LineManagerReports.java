@@ -26,7 +26,7 @@ public class LineManagerReports {
 
     @GetMapping("/candidates")
     public List<Candidate> getAvailableResources() {
-        return candidateDaoService.getListOfAvailableCandidates();
+        return candidateDaoService.getAvailableCandidates();
     }
 
     @GetMapping("/candidates/{Id}")

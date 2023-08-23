@@ -16,37 +16,15 @@ public class CandidateDaoService {
 
     @Autowired
     private ProfileMatcher profileMatcher;
-    // for testing purpose lets create a static arraylist of available resource
     @Autowired
     private CandidateRepository candidateRepository;
-    public static List<Candidate> listOfCandidate = new ArrayList<>();
-
-    static {
-        Candidate av1 = new Candidate("SAHA0216", "Sam", "Harper", "CPQ",
-                Arrays.asList("Java", "SpringBoot", "CPQ"), 4,
-                2, "ALHA0314",
-                "Alex Hales", "England", "Trent");
-        Candidate av2 = new Candidate("FAFA0216", "Sam", "Harper", "CPQ",
-                Arrays.asList("Java", "SpringBoot", "CPQ"), 4,
-                2, "ALHA0314",
-                "Alex Hales", "England", "Trent");
-        Candidate av3 = new Candidate("DESI0512", "Sam", "Harper", "CPQ",
-                Arrays.asList("Java", "SpringBoot", "CPQ"), 4,
-                2, "ROGA0438",
-                "Alex Hales", "England", "Trent");
-        listOfCandidate.add(av1);
-        listOfCandidate.add(av2);
-        listOfCandidate.add(av3);
-    }
-
-    // TODO find all the available resources
-    public List<Candidate> getListOfAvailableCandidates() {
-        return listOfCandidate;
-    }
 
     public void save(Candidate candidate) {
         candidateRepository.save(candidate);
-        //listOfCandidate.add(candidate);
+    }
+
+    public List<Candidate> getAvailableCandidates() {
+        return candidateRepository.findAll();
     }
 
     public Candidate getCandidateById(String Id) {
@@ -54,15 +32,11 @@ public class CandidateDaoService {
         if(candidateOptional.isPresent())
         {
             return candidateOptional.get();
-        }/*
-        return listOfCandidate.stream()
-                .filter(e -> e.getId().equals(Id))
-                .findFirst()
-                .orElse(null);*/
+        }
         throw new CandidateNotFoundException("Candidate with Id: "+Id+" does not exist");
     }
 
-    public List<Candidate> getListOfCandidateByYearsOfExperience(int yearOfExperience) {
+    /*public List<Candidate> getListOfCandidateByYearsOfExperience(int yearOfExperience) {
         return listOfCandidate.stream().filter(e->e.getYearsOfExperience()>= yearOfExperience)
                 .collect(Collectors.toList());
     }
@@ -70,22 +44,11 @@ public class CandidateDaoService {
     public List<Candidate> getListOfCandidateByParticularSkill(String skill) {
         return listOfCandidate.stream().filter(e->e.getSkillSet().contains(skill))
                 .collect(Collectors.toList());
-    }
-
-    public void deleteCandidateById(String Id) {
-        Candidate candidate = listOfCandidate.stream().filter(e -> e.getId().equals(Id)).findFirst().orElse(null);
-        if(candidate == null) {
-            throw new CandidateNotFoundException("Candidate with Id:"+Id+" does not exist");
-        }
-        listOfCandidate.remove(candidate);
-    }
-
-    /*public void updateCandidateWithProfileMatch(String Id) {
-        Candidate candidate = getCandidateById(Id);
-        profileMatcher.getMatchPercentageForAvailableDemands(candidate, OpenDemandDaoService.listOfDemands);
     }*/
 
-    // TODO to save the resource in the DB
+    // TODO need to add validations if the Candidate exists or not
+    public void deleteCandidateById(String Id) {
+        candidateRepository.deleteById(Id);
+    }
 
-    // TODO to delete the resource from the DB
 }
