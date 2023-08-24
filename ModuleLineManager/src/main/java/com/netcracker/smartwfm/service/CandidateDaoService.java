@@ -2,10 +2,12 @@ package com.netcracker.smartwfm.service;
 
 import com.netcracker.smartwfm.dao.Candidate;
 import com.netcracker.smartwfm.dao.Demand;
+import com.netcracker.smartwfm.dao.DemandCandidateMatch;
 import com.netcracker.smartwfm.exception.CandidateNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,21 +48,25 @@ public class CandidateDaoService {
     public void updateCandidateWithDemandCandidateMatchByCandidateId(String candidateId) {
         List<Demand> demands = demandRepository.findAll();
         Candidate candidate = getCandidateById(candidateId);
-        if (candidate != null) {
-            for (Demand demand : demands) {
-                profileMatcherService.calculateMatchingPercentage(candidate, demand);
-            }
+        if (candidate == null) {
+            throw new CandidateNotFoundException("Candidate with Id " + candidateId + " does not exist");
         }
-        throw new CandidateNotFoundException("Candidate with Id " + candidateId + " does not exist");
-
+        List<DemandCandidateMatch> demandCandidateMatches = new ArrayList<>();
+        for (Demand demand : demands) {
+            demandCandidateMatches.add(profileMatcherService.calculateMatchingPercentage(candidate, demand));
+        }
+        candidate.setDemandCandidateMatch(demandCandidateMatches);
+        candidateRepository.save(candidate);
     }
 
     public void updateCandidateWithDemandCandidateMatchForAllCandidates() {
         List<Demand> demands = demandRepository.findAll();
         List<Candidate> candidates = candidateRepository.findAll();
-        for(Candidate candidate : candidates) {
-            for(Demand demand : demands) {
+
+        for (Candidate candidate : candidates) {
+            for (Demand demand : demands) {
                 profileMatcherService.calculateMatchingPercentage(candidate, demand);
+
             }
         }
     }
