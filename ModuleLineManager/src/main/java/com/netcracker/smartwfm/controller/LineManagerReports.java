@@ -59,18 +59,16 @@ public class LineManagerReports {
         candidateDaoService.deleteCandidateById(Id);
     }
 
-    /*@GetMapping("/candidates/match/{Id}")
-    public Candidate getMatchedDemandWithCandidateId(@PathVariable String Id) {
-        candidateDaoService.updateCandidateWithProfileMatch(Id);
-        Candidate candidateBydId = getCandidateBydId(Id);
+    @GetMapping("/candidates/match/{candidateId}")
+    public Candidate getMatchedDemandWithCandidateId(@PathVariable String candidateId) {
+        candidateDaoService.updateCandidateWithDemandCandidateMatchByCandidateId(candidateId);
+        Candidate candidateBydId = getCandidateBydId(candidateId);
         return candidateBydId;
     }
 
     @GetMapping("/candidates/match")
     public List<Candidate> getMatchedDemandForAllCandidates() {
-        for(Candidate candidate : CandidateDaoService.listOfCandidate) {
-            candidateDaoService.updateCandidateWithProfileMatch(candidate.getId());
-        }
-        return CandidateDaoService.listOfCandidate;
-    }*/
+        candidateDaoService.updateCandidateWithDemandCandidateMatchForAllCandidates();
+        return candidateDaoService.getAvailableCandidates();
+    }
 }

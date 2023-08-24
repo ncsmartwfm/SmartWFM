@@ -1,16 +1,27 @@
-package com.netcracker.smartwfm.service;
+package com.netcracker.smartwfm.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.stereotype.Component;
 
-@Component
+@Entity
 public class DemandCandidateMatch {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String Id;
+    @JsonProperty("demandId")
     private String demandId;
-    @JsonIgnore
+    @JsonProperty("candidateId")
     private String candidateId;
+    @JsonProperty("match")
     private double matchPercentage;
+
+    public DemandCandidateMatch() {
+    }
 
     public String getDemandId() {
         return demandId;

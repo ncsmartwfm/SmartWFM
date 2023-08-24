@@ -5,8 +5,6 @@ import com.netcracker.smartwfm.exception.DemandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +18,14 @@ public class OpenDemandDaoService {
 
     public void save(Demand demand) {
         demandRepository.save(demand);
+    }
+
+    public Demand getDemandById(String Id) {
+        Optional<Demand> demandOptional = demandRepository.findById(Id);
+        if(demandOptional.isPresent()) {
+            return demandOptional.get();
+        }
+        throw new DemandNotFoundException("Demand with Id "+Id+" does not exist");
     }
 
     public void deleteDemandById(String Id) {
