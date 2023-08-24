@@ -13,7 +13,7 @@ import java.util.Optional;
 public class CandidateDaoService {
 
     @Autowired
-    private ProfileMatcher profileMatcher;
+    private ProfileMatcherService profileMatcherService;
     @Autowired
     private CandidateRepository candidateRepository;
     @Autowired
@@ -28,9 +28,9 @@ public class CandidateDaoService {
     }
 
     public Candidate getCandidateById(String Id) {
-        Optional<Candidate> candidateOptional = candidateRepository.findById(Id);
-        if (candidateOptional.isPresent()) {
-            return candidateOptional.get();
+        Candidate candidate = candidateRepository.findByCandidateId(Id);
+        if (candidate != null) {
+            return candidate;
         }
         throw new CandidateNotFoundException("Candidate with Id: " + Id + " does not exist");
     }
@@ -45,10 +45,10 @@ public class CandidateDaoService {
 
     public void updateCandidateWithDemandCandidateMatchByCandidateId(String candidateId) {
         List<Demand> demands = demandRepository.findAll();
-        Optional<Candidate> candidateOptional = candidateRepository.findById(candidateId);
-        if (candidateOptional.isPresent()) {
+        Candidate candidate = getCandidateById(candidateId);
+        if (candidate != null) {
             for (Demand demand : demands) {
-                profileMatcher.calculateMatchingPercentage(candidateOptional.get(), demand);
+                profileMatcherService.calculateMatchingPercentage(candidate, demand);
             }
         }
         throw new CandidateNotFoundException("Candidate with Id " + candidateId + " does not exist");
@@ -60,7 +60,7 @@ public class CandidateDaoService {
         List<Candidate> candidates = candidateRepository.findAll();
         for(Candidate candidate : candidates) {
             for(Demand demand : demands) {
-                profileMatcher.calculateMatchingPercentage(candidate, demand);
+                profileMatcherService.calculateMatchingPercentage(candidate, demand);
             }
         }
     }

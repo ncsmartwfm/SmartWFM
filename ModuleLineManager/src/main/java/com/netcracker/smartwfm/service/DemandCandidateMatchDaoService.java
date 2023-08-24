@@ -16,10 +16,10 @@ public class DemandCandidateMatchDaoService {
     }
 
     public List<DemandCandidateMatch> findListOfDemandCandidateMatchByCandidateOfficialId(String candidateId) {
-     return demandCandidateMatchRepository.findDemandCandidateMatchByCandidateId(candidateId);
+     return demandCandidateMatchRepository.findByCandidateId(candidateId);
     }
 
     public List<DemandCandidateMatch> findListOfDemandCandidateMatchByDemandId(String demandId) {
-        return demandCandidateMatchRepository.findDemandCandidateMatchByDemandId(demandId);
+        return demandCandidateMatchRepository.findByDemandId(demandId);
     }
 }

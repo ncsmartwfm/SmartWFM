@@ -4,7 +4,7 @@ import com.netcracker.smartwfm.dao.Candidate;
 import com.netcracker.smartwfm.dao.Demand;
 import com.netcracker.smartwfm.exception.CandidateNotFoundException;
 import com.netcracker.smartwfm.service.CandidateDaoService;
-import com.netcracker.smartwfm.service.OpenDemandDaoService;
+import com.netcracker.smartwfm.service.DemandDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,13 +15,13 @@ import java.util.List;
 @RestController
 public class LineManagerReports {
     @Autowired
-    private OpenDemandDaoService openDemandDaoService;
+    private DemandDaoService demandDaoService;
     @Autowired
     private CandidateDaoService candidateDaoService;
 
     @GetMapping("/demands")
     public List<Demand> getOpenDemands() {
-        return openDemandDaoService.getAllDemands();
+        return demandDaoService.getAllDemands();
     }
 
     @GetMapping("/candidates")
@@ -40,7 +40,7 @@ public class LineManagerReports {
 
     @PostMapping("/demands")
     public void createDemand(@Validated @RequestBody Demand demand) {
-        openDemandDaoService.save(demand);
+        demandDaoService.save(demand);
     }
 
     @PostMapping("/candidates")
@@ -51,7 +51,7 @@ public class LineManagerReports {
 
     @DeleteMapping("/demands/{Id}")
     public void deleteDemandById(@PathVariable String Id) {
-        openDemandDaoService.deleteDemandById(Id);
+        demandDaoService.deleteDemandById(Id);
     }
 
     @DeleteMapping("/candidates/{Id}")

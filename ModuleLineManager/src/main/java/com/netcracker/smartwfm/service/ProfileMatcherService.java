@@ -4,13 +4,12 @@ import com.netcracker.smartwfm.dao.Candidate;
 import com.netcracker.smartwfm.dao.Demand;
 import com.netcracker.smartwfm.dao.DemandCandidateMatch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-public class ProfileMatcher {
-
+@Service
+public class ProfileMatcherService {
     @Autowired
     private DemandCandidateMatchRepository demandCandidateMatchRepository;
 
@@ -29,9 +28,10 @@ public class ProfileMatcher {
             experienceMatchPercentage = (double) candidateExperience / requiredExperience * 100;
         }
         double overallMatchingPercentage = (skillMatchPercentage + experienceMatchPercentage) / 2;
-        demandCandidateMatch.setCandidateId(candidate.getCandidateOfficialId());
+        demandCandidateMatch.setCandidateId(candidate.getCandidateId());
         demandCandidateMatch.setDemandId(demand.getDemandId());
         demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
+        // TODO check what exactly is the issue here, throwing target invocation exception
         demandCandidateMatchRepository.save(demandCandidateMatch);
         return demandCandidateMatch;
     }
