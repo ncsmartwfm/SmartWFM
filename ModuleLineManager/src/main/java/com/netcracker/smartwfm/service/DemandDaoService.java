@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class OpenDemandDaoService {
+public class DemandDaoService {
     @Autowired
     private DemandRepository demandRepository;
+
     public List<Demand> getAllDemands() {
         return demandRepository.findAll();
     }
@@ -21,19 +21,18 @@ public class OpenDemandDaoService {
     }
 
     public Demand getDemandById(String Id) {
-        Optional<Demand> demandOptional = demandRepository.findById(Id);
-        if(demandOptional.isPresent()) {
-            return demandOptional.get();
+        Demand demand = demandRepository.findByDemandId(Id);
+        if (demand != null) {
+            return demand;
         }
-        throw new DemandNotFoundException("Demand with Id "+Id+" does not exist");
+        throw new DemandNotFoundException("Demand with Id " + Id + " does not exist");
     }
 
     public void deleteDemandById(String Id) {
-        Optional<Demand> demandOptional = demandRepository.findById(Id);
-        if(demandOptional.isPresent()) {
-            demandRepository.delete(demandOptional.get());
+        Demand demand = demandRepository.findByDemandId(Id);
+        if (demand != null) {
+            demandRepository.delete(demand);
         }
-        throw new DemandNotFoundException("Demand for the Id "+Id+" does not exist");
-
+        throw new DemandNotFoundException("Demand for the Id " + Id + " does not exist");
     }
 }

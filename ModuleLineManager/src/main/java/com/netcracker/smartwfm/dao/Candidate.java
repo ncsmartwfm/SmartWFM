@@ -9,14 +9,14 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-@JsonPropertyOrder({"candidateOfficialId", "firstName", "lastName", "domain",
+@JsonPropertyOrder({"candidateId", "firstName", "lastName", "domain",
         "skillSet", "yearsOfExperience", "yearOfExperienceInCurrentDomain",
         "candidateEmailId", "lineManagerOfficialId",
         "lineManagerName", "lineManagerEmailId", "country", "city", "match"})
 public class Candidate {
     @Id
-    @JsonProperty("candidateOfficialId")
-    private String candidateOfficialId;
+    @JsonProperty("candidateId")
+    private String candidateId;
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
@@ -50,13 +50,13 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(String candidateOfficialId, String firstName,
+    public Candidate(String candidateId, String firstName,
                      String lastName, String domain, List<String> skillSet,
                      Integer yearsOfExperience, Integer yearOfExperienceInCurrentDomain,
                      String candidateEmailId, String lineManagerId,
                      String lineManagerEmailId, String country, String city,
                      String lineManagerName) {
-        this.candidateOfficialId = candidateOfficialId;
+        this.candidateId = candidateId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.domain = domain;
@@ -71,12 +71,12 @@ public class Candidate {
         this.lineManagerName = lineManagerName;
     }
 
-    public String getCandidateOfficialId() {
-        return candidateOfficialId;
+    public String getCandidateId() {
+        return candidateId;
     }
 
-    public void setCandidateOfficialId(String candidateOfficialId) {
-        this.candidateOfficialId = candidateOfficialId;
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
     }
 
     public String getLineManagerId() {
