@@ -1,47 +1,83 @@
 package com.netcracker.smartwfm.dao;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
 @Entity
+@JsonPropertyOrder({"candidateOfficialId", "firstName", "lastName", "domain",
+        "skillSet", "yearsOfExperience", "yearOfExperienceInCurrentDomain",
+        "candidateEmailId", "lineManagerOfficialId",
+        "lineManagerName", "lineManagerEmailId", "country", "city", "match"})
 public class Candidate {
     @Id
-    private String Id;
+    @JsonProperty("candidateOfficialId")
+    private String candidateOfficialId;
+    @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("lastName")
     private String lastName;
+    @JsonProperty("domain")
     private String domain;
+    @JsonProperty("skillSet")
     private List<String> skillSet;
+    @JsonProperty("yearsOfExperience")
     private Integer yearsOfExperience;
+    @JsonProperty("yearOfExperienceInCurrentDomain")
     private Integer yearOfExperienceInCurrentDomain;
+    @JsonProperty("candidateEmailId")
+    private String candidateEmailId;
+    @JsonProperty("lineManagerOfficialId")
     private String lineManagerId;
-    private String demandIdWithLMRecommendation;
+    @JsonProperty("lineManagerName")
+    private String lineManagerName;
+    @JsonProperty("lineManagerEmailId")
+    private String lineManagerEmailId;
+    @JsonProperty("country")
     private String country;
+    @JsonProperty("city")
     private String city;
+
+    @JsonProperty("match")
+    @OneToMany
+    private List<DemandCandidateMatch> demandCandidateMatch;
 
 
     public Candidate() {
     }
 
-    public Candidate(String id, String firstName, String lastName, String domain,
-                     List<String> skillSet, Integer yearOfExperience,
-                     Integer yearOfExperienceInCurrentDomain, String lineManagerId,
-                     String lineManagerName, String country, String city) {
-        Id = id;
+    public Candidate(String candidateOfficialId, String firstName,
+                     String lastName, String domain, List<String> skillSet,
+                     Integer yearsOfExperience, Integer yearOfExperienceInCurrentDomain,
+                     String candidateEmailId, String lineManagerId,
+                     String lineManagerEmailId, String country, String city,
+                     String lineManagerName) {
+        this.candidateOfficialId = candidateOfficialId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.domain = domain;
         this.skillSet = skillSet;
-        this.yearsOfExperience = yearOfExperience;
+        this.yearsOfExperience = yearsOfExperience;
         this.yearOfExperienceInCurrentDomain = yearOfExperienceInCurrentDomain;
+        this.candidateEmailId = candidateEmailId;
         this.lineManagerId = lineManagerId;
-        this.lineManagerName = lineManagerName;
+        this.lineManagerEmailId = lineManagerEmailId;
         this.country = country;
         this.city = city;
+        this.lineManagerName = lineManagerName;
     }
 
-    private String lineManagerName;
+    public String getCandidateOfficialId() {
+        return candidateOfficialId;
+    }
+
+    public void setCandidateOfficialId(String candidateOfficialId) {
+        this.candidateOfficialId = candidateOfficialId;
+    }
 
     public String getLineManagerId() {
         return lineManagerId;
@@ -73,14 +109,6 @@ public class Candidate {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        this.Id = id;
     }
 
     public String getFirstName() {
@@ -131,19 +159,27 @@ public class Candidate {
         this.yearOfExperienceInCurrentDomain = yearOfExperienceInCurrentDomain;
     }
 
-    public String getDemandIdWithLMRecommendation() {
-        return demandIdWithLMRecommendation;
+    public String getCandidateEmailId() {
+        return candidateEmailId;
     }
 
-    public void setDemandIdWithLMRecommendation(String demandIdWithLMRecommendation) {
-        this.demandIdWithLMRecommendation = demandIdWithLMRecommendation;
+    public void setCandidateEmailId(String candidateEmailId) {
+        this.candidateEmailId = candidateEmailId;
     }
 
-    /*public List<DemandCandidateMatch> getListOfDemandCandidateMatch() {
-        return listOfDemandCandidateMatch;
+    public String getLineManagerEmailId() {
+        return lineManagerEmailId;
     }
 
-    public void setListOfDemandCandidateMatch(List<DemandCandidateMatch> listOfDemandCandidateMatch) {
-        this.listOfDemandCandidateMatch = listOfDemandCandidateMatch;
-    }*/
+    public void setLineManagerEmailId(String lineManagerEmailId) {
+        this.lineManagerEmailId = lineManagerEmailId;
+    }
+
+    public List<DemandCandidateMatch> getDemandCandidateMatch() {
+        return demandCandidateMatch;
+    }
+
+    public void setDemandCandidateMatch(List<DemandCandidateMatch> demandCandidateMatch) {
+        this.demandCandidateMatch = demandCandidateMatch;
+    }
 }

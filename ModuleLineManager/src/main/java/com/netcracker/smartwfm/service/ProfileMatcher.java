@@ -2,6 +2,8 @@ package com.netcracker.smartwfm.service;
 
 import com.netcracker.smartwfm.dao.Candidate;
 import com.netcracker.smartwfm.dao.Demand;
+import com.netcracker.smartwfm.dao.DemandCandidateMatch;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 @Component
 public class ProfileMatcher {
 
+    @Autowired
+    private DemandCandidateMatchRepository demandCandidateMatchRepository;
 
     public DemandCandidateMatch calculateMatchingPercentage(Candidate candidate, Demand demand) {
         DemandCandidateMatch demandCandidateMatch = new DemandCandidateMatch();
@@ -25,9 +29,10 @@ public class ProfileMatcher {
             experienceMatchPercentage = (double) candidateExperience / requiredExperience * 100;
         }
         double overallMatchingPercentage = (skillMatchPercentage + experienceMatchPercentage) / 2;
-        demandCandidateMatch.setCandidateId(candidate.getId());
-        demandCandidateMatch.setDemandId(demand.getId());
+        demandCandidateMatch.setCandidateId(candidate.getCandidateOfficialId());
+        demandCandidateMatch.setDemandId(demand.getDemandId());
         demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
+        demandCandidateMatchRepository.save(demandCandidateMatch);
         return demandCandidateMatch;
     }
 
