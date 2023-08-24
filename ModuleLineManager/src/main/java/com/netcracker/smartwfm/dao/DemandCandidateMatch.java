@@ -6,12 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.stereotype.Component;
 
 @Entity
 public class DemandCandidateMatch {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @UuidGenerator
     private String Id;
     @JsonProperty("demandId")
     private String demandId;
