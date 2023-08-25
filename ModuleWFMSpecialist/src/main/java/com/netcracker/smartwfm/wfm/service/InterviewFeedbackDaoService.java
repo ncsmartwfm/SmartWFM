@@ -24,11 +24,11 @@ public class InterviewFeedbackDaoService {
     }
 
     public InterviewFeedback getInterviewFeedbackById(String Id) {
-        InterviewFeedback interviewFeedback = interviewFeedbackRepository.findByInterviewId(Id);
+        InterviewFeedback interviewFeedback = interviewFeedbackRepository.findInterviewFeedbackById(Id);
         if (interviewFeedback != null) {
             return interviewFeedback;
         }
-        throw new InterviewFeedbackNotFoundException("Interview with Id: " + Id + " does not exist");
+        throw new InterviewFeedbackNotFoundException("Interview Feedback with Id: " + Id + " does not exist");
     }
 
 }

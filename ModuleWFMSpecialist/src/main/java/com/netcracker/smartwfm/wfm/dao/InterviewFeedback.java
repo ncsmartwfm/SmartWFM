@@ -10,7 +10,7 @@ public class InterviewFeedback {
     @Id
     @UuidGenerator
     private String Id;
-    @JsonProperty("interviewId")
+    @JsonProperty("interviewFeedbackId")
     private String demandId;
     @JsonProperty("candidateId")
     private String candidateId;

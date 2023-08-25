@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class LineManagerReports {
+public class LineManagerReportsController {
     @Autowired
     private DemandDaoService demandDaoService;
     @Autowired
