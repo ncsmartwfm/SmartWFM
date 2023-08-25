@@ -31,7 +31,6 @@ public class ProfileMatcherService {
         demandCandidateMatch.setCandidateId(candidate.getCandidateId());
         demandCandidateMatch.setDemandId(demand.getDemandId());
         demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
-        // TODO check what exactly is the issue here, throwing target invocation exception
         demandCandidateMatchRepository.save(demandCandidateMatch);
         return demandCandidateMatch;
     }
