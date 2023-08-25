@@ -1,4 +1,4 @@
-package com.netcracker.smartwfm.SmartWFM;
+package com.netcracker.smartwfm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
