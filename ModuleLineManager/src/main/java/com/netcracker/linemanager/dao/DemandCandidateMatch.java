@@ -21,6 +21,17 @@ public class DemandCandidateMatch {
     @JsonProperty("match")
     private double matchPercentage;
 
+    public boolean isRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(boolean recommended) {
+        this.recommended = recommended;
+    }
+
+    @JsonProperty("recommended")
+    private boolean recommended;
+
     public DemandCandidateMatch() {
     }
 
