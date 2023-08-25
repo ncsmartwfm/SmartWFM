@@ -1,6 +1,6 @@
-package com.netcracker.smartwfm.service;
+package com.netcracker.linemanager.service;
 
-import com.netcracker.smartwfm.dao.DemandCandidateMatch;
+import com.netcracker.linemanager.dao.DemandCandidateMatch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.netcracker.smartwfm.model;
+package com.netcracker.common.model;
 
 import jakarta.persistence.*;
 

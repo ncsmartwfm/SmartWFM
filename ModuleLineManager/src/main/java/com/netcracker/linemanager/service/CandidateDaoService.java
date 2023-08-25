@@ -1,9 +1,9 @@
-package com.netcracker.smartwfm.service;
+package com.netcracker.linemanager.service;
 
-import com.netcracker.smartwfm.dao.Candidate;
-import com.netcracker.smartwfm.dao.Demand;
-import com.netcracker.smartwfm.dao.DemandCandidateMatch;
-import com.netcracker.smartwfm.exception.CandidateNotFoundException;
+import com.netcracker.linemanager.dao.Candidate;
+import com.netcracker.linemanager.dao.Demand;
+import com.netcracker.linemanager.dao.DemandCandidateMatch;
+import com.netcracker.linemanager.exception.CandidateNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

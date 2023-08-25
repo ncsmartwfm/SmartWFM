@@ -1,4 +1,4 @@
-package com.netcracker.smartwfm.dao;
+package com.netcracker.linemanager.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

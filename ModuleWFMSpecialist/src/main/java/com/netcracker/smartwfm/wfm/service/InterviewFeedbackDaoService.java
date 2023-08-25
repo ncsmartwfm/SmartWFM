@@ -1,0 +1,34 @@
+package com.netcracker.smartwfm.wfm.service;
+
+
+import com.netcracker.smartwfm.wfm.dao.InterviewFeedback;
+import com.netcracker.smartwfm.wfm.exceptions.InterviewFeedbackNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class InterviewFeedbackDaoService {
+
+
+    @Autowired
+    private InterviewFeedbackRepository interviewFeedbackRepository;
+
+    public void save(InterviewFeedback interviewFeedback) {
+        interviewFeedbackRepository.save(interviewFeedback);
+    }
+
+    public List<InterviewFeedback> getInterviewFeedbacks() {
+        return interviewFeedbackRepository.findAll();
+    }
+
+    public InterviewFeedback getInterviewFeedbackById(String Id) {
+        InterviewFeedback interviewFeedback = interviewFeedbackRepository.findByInterviewId(Id);
+        if (interviewFeedback != null) {
+            return interviewFeedback;
+        }
+        throw new InterviewFeedbackNotFoundException("Interview with Id: " + Id + " does not exist");
+    }
+
+}

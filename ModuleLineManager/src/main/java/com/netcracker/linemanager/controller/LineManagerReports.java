@@ -1,10 +1,10 @@
-package com.netcracker.smartwfm.controller;
+package com.netcracker.linemanager.controller;
 
-import com.netcracker.smartwfm.dao.Candidate;
-import com.netcracker.smartwfm.dao.Demand;
-import com.netcracker.smartwfm.exception.CandidateNotFoundException;
-import com.netcracker.smartwfm.service.CandidateDaoService;
-import com.netcracker.smartwfm.service.DemandDaoService;
+import com.netcracker.linemanager.dao.Candidate;
+import com.netcracker.linemanager.dao.Demand;
+import com.netcracker.linemanager.exception.CandidateNotFoundException;
+import com.netcracker.linemanager.service.CandidateDaoService;
+import com.netcracker.linemanager.service.DemandDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

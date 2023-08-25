@@ -1,4 +1,4 @@
-package com.netcracker.smartwfm;
+package com.netcracker.common;
 
 public class Main {
     public static void main(String[] args) {
